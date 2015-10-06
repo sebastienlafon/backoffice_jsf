@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" template="/templates/template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+		Code à ajouter pour afin de définir l'interface
+
+		<h:outputText value="You are in the Main Content Section admin.xhtml" />
+
+		<h:form id="form">
+
+			<p:dataTable paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="15, 30, 60, 120" rows="15" id="tableArticles" var="article" value="#{TbArticleService.loadArticles()}" selectionMode="single" selection="#{TbArticleService.selectedArticle}" rowKey="#{article.idArticle}">
+				<f:facet name="header">
+					Liste des articles
+				</f:facet>
+				<p:column headerText="Id">
+					<h:outputText value="#{article.idArticle}" />
+				</p:column>
+				<p:column headerText="Catégorie">
+					<h:outputText value="#{article.tbCategorie.CLibelle}" />
+				</p:column>
+				<p:column headerText="Désignation">
+					<h:outputText value="#{article.ADesignation}" />
+				</p:column>
+				<p:column headerText="Prix HT">
+					<h:outputText value="#{article.APht}" />
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton update=":form:articleDetail" value="visualiser" oncomplete="PF('ArticleDialog').show();" />
+				</f:facet>
+
+			</p:dataTable>
+			<h:form>
+
+			</h:form>
+
+			<p:dialog header="Détail de l'article" widgetVar="ArticleDialog" showEffect="explode" hideEffect="bounce" resizable="false" minHeight="290">
+				<p:outputPanel id="articleDetail" style="text-align: left;">
+
+					<p:panelGrid columns="1" rendered="#{not empty TbArticleService.selectedArticle}" columnClasses="label, value">
+						<h:outputText value="Article #{TbArticleService.selectedArticle.idArticle}" />
+
+						<p:dataList value="#{TbArticleService.selectedArticle}" var="articleDetail" type="definition">
+							<f:facet name="header">
+								Modification
+							</f:facet>
+							<p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="600" />
+							<h:panelGrid columns="2" style="margin-top: 10px">
+								<p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" icon="ui-icon-disk" />
+
+								<p:commandButton value="Clear" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
+							</h:panelGrid>
+							<p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+								<h:outputText id="display" value="#{editorView.text}" escape="false" />
+							</p:dialog>
+						</p:dataList>
+                                                <h:outputText value="Catégorie"/>
+                                                <h:selectOneMenu id="categories" value="#{TbArticleService.selectedArticle.tbCategorie}">
+                                                    <f:selectItems value="#{TbCategorieService.loadCategories()}" var="cat" itemLabel="#{cat.CLibelle}"/>
+                                                </h:selectOneMenu>
+						<h:outputText value="Article #{TbArticleService.selectedArticle.ADescription}" />
+						<h:inputText value="#{TbStatutService.selectedStatut.SLibelle}" style="width: 300px;" />
+
+						<h:outputText value="Article #{TbArticleService.selectedArticle.ADesignation}" />
+						<h:inputText value="#{TbStatutService.selectedStatut.SLibelle}" style="width: 300px;" />
+
+						<h:outputText value="Article #{TbArticleService.selectedArticle.APht}" />
+						<h:inputText value="#{TbStatutService.selectedStatut.SLibelle}" style="width: 300px;" />
+
+						<h:outputText value="Article #{TbArticleService.selectedArticle.AQuantiteStock}" />
+						<h:inputText value="#{TbStatutService.selectedStatut.SLibelle}" style="width: 300px;" />
+
+						<h:outputText value="Article #{TbArticleService.selectedArticle.AVisible}" />
+						<h:inputText value="#{TbStatutService.selectedStatut.SLibelle}" style="width: 300px;" />
+
+						<p:commandButton update=":form:tableArticles" icon="ui-icon-plusthick" value="Ajouter" actionListener="#{TbArticleService.createArticle()}" />
+						<p:commandButton update=":form:articleDetail" icon="ui-icon-search" value="Editer" oncomplete="PF('articleDialog').show()" disabled="#{empty
+                    TbArticleService.selectedArticle}" />
+						<p:commandButton update=":form:tableArticles" icon="ui-icon-closethick" value="Supprimer" actionListener="#{TbArticleService.deleteArticle(TbArticleService.selectedArticle)}" disabled="#{empty TbArticleService.selectedArticle}" />
+
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+
+		<h:form id="formartic">
+
+			<p:dialog header="Détail article" widgetVar="articleDialog" showEffect="fade" hideEffect="fade" resizable="true" height="100" width="450">
+				<p:outputPanel id="articleDetail">
+					<p:panelGrid columns="2" rendered="#{not empty TbArticleService.selectedArticle}" columnClasses="label,value">
+						<h:outputText value="Libellé" />
+						<h:inputText value="#{TbArticleService.selectedArticle.SLibelle}" style="width: 300px;" />
+					</p:panelGrid>
+					<br/>
+					<p:commandButton update=":form:tableArticles" icon="ui-icon-search" value="Enregistrer" actionListener="#{TbArticleService.saveArticle(TbArticleService.selectedArticle)}" onsuccess="PF('articleDialog').hide()" style="text-align: center;" />
+				</p:outputPanel>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

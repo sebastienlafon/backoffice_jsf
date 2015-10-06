@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+
+xmlns:ui="http://java.sun.com/jsf/facelets"
+
+xmlns:f="http://java.sun.com/jsf/core"
+
+xmlns:h="http://java.sun.com/jsf/html"
+
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+
+xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+
+template="/templates/template.xhtml"
+xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="content">
+
+<!-- Code à ajouter pour afin de définir l'interface
+
+ <h:outputText value="You are in the Main Content Section admin.xhtml"/>-->
+
+
+ <h:form id="form">
+  
+    <h3 style="margin-top:0">Client</h3>
+    <p:tree value="#{treeBasicView.root}" var="node" orientation="horizontal">
+        <p:treeNode>
+            <h:outputText value="#{node}" />
+        </p:treeNode>
+    </p:tree>
+
+
+ 
+ </h:form>
+ 
+ <h:form>
+    <p:growl id="messages" />
+ 
+    <p:splitButton value="Save" actionListener="#{buttonView.save}" update="messages" icon="ui-icon-disk">
+        <p:menuitem value="Update" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+        <p:menuitem value="Delete" actionListener="#{buttonView.delete}" ajax="false" icon="ui-icon-close" />
+        <p:separator />
+        <p:menuitem value="" icon="ui-icon-extlink" />
+    </p:splitButton>
+</h:form>
+
+
+
+ 
+ 
+ </ui:define>
+
+</ui:composition>
+
+
+
+
+ 

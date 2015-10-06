@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+ xmlns:h="http://java.sun.com/jsf/html"
+
+ xmlns:f="http://java.sun.com/jsf/core"
+
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:p="http://primefaces.org/ui">
+
+ <h:head>
+
+ <title>Speedy Market Admin</title>
+
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+ <h:outputStylesheet name="css/style.css" />
+ <h:outputStylesheet name="font-awesome-4.4.0/css/font-awesome.css" />
+
+ 
+
+ </h:head>
+
+ <h:body>
+ <h:graphicImage value="resources/images/logo.png" />
+ <div id="header">
+    <div id="headerContent">
+        <h1>Speedy Market BACK OFFICE </h1>
+ <h:graphicImage value="resources/images/bg.jpg" />
+    </div>
+ </div>
+   
+     <h:form class="formMenu">
+         
+         <p:tabMenu class="tabMenu" activeIndex="#{param.i}">
+             
+           <p:menuitem icon="ui-icon-rest" value="Administration" url="./admin.jsf">
+               <f:param name="i" value="1"></f:param>
+           </p:menuitem>
+           <p:menuitem icon="ui-icon-home" value="Catégories" url="./categories.jsf">
+               <f:param name="i" value="1"></f:param>
+           </p:menuitem>
+          <p:menuitem icon="ui-icon-document" value="Articles" url="./articles.jsf">
+               <f:param name="i" value="2"></f:param>
+           </p:menuitem>
+           <p:menuitem icon="ui-icon-calendar" value="Commandes" url="./commandes.jsf">
+               <f:param name="i" value="3"></f:param>
+           </p:menuitem>
+           <p:menuitem icon="fa fa-fw fa-remove" value="Tva" url="./tva.jsf">
+               <f:param name="i" value="5"></f:param>
+           </p:menuitem>            
+            <p:menuitem icon="fa fa-medium" value="Déconnexion" url="./login.jsf">
+               <f:param name="i" value="6"></f:param>
+           </p:menuitem>
+            <p:menuitem icon="fa fa-briefcase" value="Statuts" url="./statuts.jsf">
+               <f:param name="i" value="7"></f:param>
+           </p:menuitem>
+         </p:tabMenu>
+   </h:form>
+
+ <h:panelGroup id="content" layout="block">
+
+ <ui:insert name="content">Main Content</ui:insert>
+
+ </h:panelGroup>
+  <p:breadCrumb class="breadcrumb">
+    <p:menuitem value="Administration" url="./admin.jsf" />
+    <p:menuitem value="Catégories" url="./categories.jsf"/>
+    <p:menuitem value="Articles" url="./articles.jsf"/>
+    <p:menuitem value="Commandes" url="./commandes.jsf"/>
+    <p:menuitem value="Tva" url="./tva.jsf"/>
+    <p:menuitem value="Déconnexion" url="./login.jsf"/>
+    <p:menuitem value="Statuts" url="./statuts.jsf"/>
+
+</p:breadCrumb>
+ <div id="footer">
+   
+ <span>
+
+ <h1>SpeedyMarket</h1>
+
+ <i>Application d'administration des produits, comptes, commandes...</i>
+
+ </span>
+
+ </div>
+
+ </h:body>
+
+</html>
