@@ -15,28 +15,27 @@ xmlns:p="http://primefaces.org/ui">
 
 <ui:define name="content">
 
- Reglages des Parametres
+  <h:form id="form">
 
- <h:outputText value="You are in the Main Content Section admin.xhtml"/>
- 
-<h:form id="form">
-  
- <p:dataTable id="tableCategories" var="categorie" value="#{TbCategorieService.loadCategories()}" 
-selectionMode="single" selection="#{TbCategorieService.selectedCategorie}" rowKey="#{categorie.idCategorie}">
- <f:facet name="header">
- Liste des catégories
- </f:facet>
- <p:column headerText="Id">
- <h:outputText value="#{categorie.idCategorie}" />
- </p:column>
- <p:column headerText="Libellé">
- <h:outputText value="#{categorie.CLibelle}" />
- </p:column>
- </p:dataTable>
+            <p:dataTable id="tableCategories" var="categorie" value="#{TbCategorieService.loadCategories()}" 
+                        selectionMode="single" selection="#{TbCategorieService.selectedCategorie}" rowKey="#{categorie.idCategorie}"
+                        rows="20"
+                        paginator="true">
+                <f:facet name="header">
+                    Liste des catégories
+                </f:facet>
+                <p:column headerText="Id">
+                    <h:outputText value="#{categorie.idCategorie}" />
+                </p:column>
+                <p:column headerText="Libellé">
+                    <h:outputText value="#{categorie.CLibelle}" />
+                </p:column>
+                <p:column headerText="Catégorie mere">
+                    <h:outputText value="#{categorie.tbCategorie.CLibelle}" />
+                </p:column>
+            </p:dataTable>
 
-
- 
- </h:form>
+        </h:form>
 
  </ui:define>
 

@@ -51,14 +51,16 @@ selectionMode="single" selection="#{TbCommandeService.selectedCommande}" rowKey=
      </f:facet>
  </p:dataTable>
     
-    <p:dialog header="Détail de la commande" widgetVar="commandeDialog" showEffect="fade" hideEffect="fade"
+    <p:dialog header="Détail de la commande" widgetVar="commandeDialog" 
+              showEffect="fade" hideEffect="fade"
               resizable="true" minHeight="188">
         <p:outputPanel id="commandeDetail" style="text-align: left;">
             <p:panelGrid columns="3" rendered="#{not empty TbCommandeService.selectedCommande}"
                          columnClasses="label, value">
 
                 <h:outputText value="Commande #{TbCommandeService.selectedCommande.idCommande}"/>
-                <p:dataList value="#{TbCommandeService.selectedCommande.tbLigneCommandes}" var="LigneCde" type="definition">
+                <p:dataList value="#{TbCommandeService.selectedCommande.tbLigneCommandes}" 
+                            var="LigneCde" type="definition">
                     <f:facet name="header">
                         Liste des articles
                     </f:facet>
